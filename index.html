@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XCWCL9VWZQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XCWCL9VWZQ');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dcha部 - チャレンジパッド非公式ファン＆ハッキング部</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XCWCL9VWZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XCWCL9VWZQ');
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -206,11 +206,19 @@
             </div>
         </section>
 
-        <!-- Specs Tab (TAB-A04-BR3) -->
+        <!-- Specs Tab -->
         <section id="tab-specs" class="tab-content hidden space-y-6">
-            <div>
-                <h2 class="text-2xl font-bold text-slate-900">端末情報一覧</h2>
-                <p class="text-sm text-slate-600">チャレンジパッド各機種の詳細スペックです。</p>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">端末情報一覧</h2>
+                    <p class="text-sm text-slate-600">チャレンジパッド各機種の詳細スペックです。</p>
+                </div>
+                <div>
+                    <a href="https://docs.google.com/spreadsheets/d/16eADWFWI2Fj7R5s45tyUKaf4NMw0oXKZxyRiGeVU2lA/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium rounded-[5px] transition shadow ripple inline-flex items-center">
+                        <span>詳細スプレッドシートを開く</span>
+                        <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                </div>
             </div>
 
             <div class="space-y-6">
@@ -305,27 +313,35 @@
                         <p class="text-sm text-slate-600 mt-0.5">maroidOSの開発や各種ハッキング・研究を行っています。</p>
                     </div>
                 </div>
+
+                <div class="bg-white border border-slate-200 rounded-[5px] p-6 shadow-sm space-y-2">
+                    <h3 class="text-base font-bold text-slate-900">アクセス解析について (Googleアナリティクス)</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        当サイトでは、サイトの利用状況を把握するためにGoogleアナリティクスを使用しています。Googleアナリティクスはトラフィックデータの収集のためにCookieを使用しています。
+                    </p>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- PixelTouch Warning Modal -->
     <div id="pixel-touch-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
-            <div id="pixel-touch-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">⚠️</div>
-                    <h3 class="text-lg font-bold text-slate-900">お知らせ・警告</h3>
-                </div>
-                <div class="space-y-3 mb-6">
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        PixelTouchはサービス終了します。<br>
-                        今後からはbypass.binを利用してください。
-                    </p>
-                </div>
-                <div class="flex justify-end space-x-3">
-                    <button onclick="delayedAction(() => closePixelTouchModal(), event)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-[5px] transition ripple">閉じる</button>
-                    <a id="pixel-touch-confirm-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="closePixelTouchModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition shadow ripple">外部サイトへ移動</a>
-                </div>
+        <div id="pixel-touch-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">⚠️</div>
+                <h3 class="text-lg font-bold text-slate-900">お知らせ・警告</h3>
+            </div>
+            <div class="space-y-3 mb-6">
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    PixelTouchはサービス終了します。<br>
+                    今後からはbypass.binを利用してください。<br>
+                    bypass.binはArchiveからDL。bypass.binはSDカードのrootに入れて動作します。
+                </p>
+            </div>
+            <div class="flex flex-wrap justify-end gap-2">
+                <button onclick="delayedAction(() => closePixelTouchModal(), event)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-[5px] transition ripple">閉じる</button>
+                <a href="https://kakyu0630.xyz/PixelTouch/" target="_blank" rel="noopener noreferrer" onclick="closePixelTouchModal()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium rounded-[5px] transition shadow ripple">Archiveサイト</a>
+                <a id="pixel-touch-confirm-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="closePixelTouchModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition shadow ripple">外部サイトへ移動</a>
             </div>
         </div>
     </div>
