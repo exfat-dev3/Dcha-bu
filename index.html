@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dcha部 - チャレンジパッド非公式ファン＆ハッキング部</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            border-radius: 5px;
+        }
+        .ripple {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+        .ripple:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform 0.5s, opacity 1s;
+        }
+        .ripple:active:after {
+            transform: scale(0, 0);
+            opacity: 0.3;
+            transition: 0s;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-lg text-white shadow-md shadow-indigo-500/30">
+                    D
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-slate-900">Dcha部 Sites</h1>
+                </div>
+            </div>
+            
+            <nav class="flex flex-wrap gap-2 justify-center">
+                <button onclick="delayedAction(() => switchTab('home'), event)" class="tab-btn px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition shadow-sm ripple">ホーム</button>
+                <button onclick="delayedAction(() => switchTab('roms'), event)" class="tab-btn px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-[5px] transition shadow-sm ripple">チャレンジパッド ROMS</button>
+                <button onclick="delayedAction(() => switchTab('specs'), event)" class="tab-btn px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-[5px] transition shadow-sm ripple">Pad端末情報</button>
+                <button onclick="delayedAction(() => switchTab('credits'), event)" class="tab-btn px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-[5px] transition shadow-sm ripple">サイトクレジット</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8">
+        
+        <!-- Home Tab -->
+        <section id="tab-home" class="tab-content space-y-6">
+            <div class="bg-gradient-to-r from-indigo-50 to-slate-100 border border-indigo-100 p-8 rounded-[5px] shadow-sm">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-3">Dcha部へようこそ！</h2>
+                <p class="text-slate-600 text-base mb-6 max-w-2xl">
+                    当サイトは、進研ゼミの学習専用タブレット「チャレンジパッド」シリーズの非公式ファンコミュニティおよびカスタムROM・ハッキング情報をまとめたアーカイブサイトです。
+                </p>
+                <button onclick="delayedAction(() => switchTab('roms'), event)" class="inline-flex items-center px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-[5px] transition shadow-md shadow-indigo-600/20 ripple">
+                    <span>ROM情報を見に行く</span>
+                    <svg class="w-5 h-5 ml-2 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white border border-slate-200 p-6 rounded-[5px] shadow-sm">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-sm">
+                        🚀
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">カスタムROM</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        PixelTouchやmaroidOSなど、チャレンジパッドをより便利に活用するための各種カスタムROM情報を掲載。
+                    </p>
+                </div>
+                <div class="bg-white border border-slate-200 p-6 rounded-[5px] shadow-sm">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-sm">
+                        📊
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">詳細な端末情報</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        チャレンジパッド3、Neo、Nextなど各世代のハードウェアスペックや仕様を分かりやすく整理。
+                    </p>
+                </div>
+                <div class="bg-white border border-slate-200 p-6 rounded-[5px] shadow-sm">
+                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-sm">
+                        🤝
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">開発・貢献者</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        コミュニティを支える開発者や、素晴らしいプロジェクトへのクレジットと詳細情報をご紹介。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROMs Tab -->
+        <section id="tab-roms" class="tab-content hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">チャレンジパッド ROMS</h2>
+                    <p class="text-sm text-slate-600">コミュニティで開発・公開されているカスタムROMや関連プロジェクトの情報をまとめています。</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <!-- PixelTouch Project Card -->
+                <div class="bg-white border border-slate-200 rounded-[5px] p-6 shadow-sm">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                        <div>
+                            <span class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-full border border-red-100">サービス終了</span>
+                            <h3 class="text-xl font-bold text-slate-900 mt-2">PixelTouch</h3>
+                            <p class="text-sm text-slate-600 mt-1">チャレンジタブレットNeo/NextをPixel風タブレットに!</p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button onclick="delayedAction(() => showPixelTouchCreditsModal(), event)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm rounded-[5px] transition shadow-sm ripple inline-flex items-center">
+                                <span>クレジットを表示</span>
+                            </button>
+                            <button onclick="delayedAction(() => showPixelTouchDetailsModal(), event)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm rounded-[5px] transition shadow-sm ripple inline-flex items-center">
+                                <span>詳細を見る</span>
+                            </button>
+                            <a href="https://pixeltouch.org/" target="_blank" rel="noopener noreferrer" onclick="showPixelTouchModal(event)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-[5px] transition shadow ripple inline-flex items-center">
+                                <span>PixelTouchのサイトを開く</span>
+                                <svg class="w-4 h-4 ml-1.5 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-500 bg-slate-50 p-3 rounded-[5px] border border-slate-200">
+                        URL: <span class="text-indigo-600 underline">https://pixeltouch.org/</span>
+                    </div>
+                </div>
+
+                <!-- Cpad GMS System Project Card -->
+                <div class="bg-white border border-slate-200 rounded-[5px] p-6 shadow-sm">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                        <div>
+                            <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full border border-indigo-100">カスタムROM</span>
+                            <h3 class="text-xl font-bold text-slate-900 mt-2">Cpad GMS System</h3>
+                            <p class="text-sm text-slate-600 mt-1">システムイメージを GMS に最適化させます</p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button onclick="delayedAction(() => showGmsCreditsModal(), event)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm rounded-[5px] transition shadow-sm ripple inline-flex items-center">
+                                <span>クレジットを表示</span>
+                            </button>
+                            <button onclick="delayedAction(() => showGmsDetailsModal(), event)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm rounded-[5px] transition shadow-sm ripple inline-flex items-center">
+                                <span>詳細を見る</span>
+                            </button>
+                            <a href="https://github.com/s1204IT/CPadGmsSystem" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-[5px] transition shadow ripple inline-flex items-center">
+                                <span>GitHubを開く</span>
+                                <svg class="w-4 h-4 ml-1.5 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-500 bg-slate-50 p-3 rounded-[5px] border border-slate-200">
+                        URL: <span class="text-indigo-600 underline">https://github.com/s1204IT/CPadGmsSystem</span>
+                    </div>
+                </div>
+
+                <!-- maroidOS v1.0.0 Project Card -->
+                <div class="bg-white border border-slate-200 rounded-[5px] p-6 shadow-sm">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                        <div>
+                            <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full border border-indigo-100">カスタムROM</span>
+                            <h3 class="text-xl font-bold text-slate-900 mt-2">maroidOS v1.0.0</h3>
+                            <p class="text-sm text-slate-600 mt-1">maronが作った純ROMベースカスタムROM</p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button onclick="delayedAction(() => showMaroidCreditsModal(), event)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm rounded-[5px] transition shadow-sm ripple inline-flex items-center">
+                                <span>クレジットを表示</span>
+                            </button>
+                            <button onclick="delayedAction(() => showMaroidDetailsModal(), event)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm rounded-[5px] transition shadow-sm ripple inline-flex items-center">
+                                <span>詳細を見る</span>
+                            </button>
+                            <a href="https://exfat-dev3.github.io/maroidOS" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-[5px] transition shadow ripple inline-flex items-center">
+                                <span>サイトを開く</span>
+                                <svg class="w-4 h-4 ml-1.5 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-500 bg-slate-50 p-3 rounded-[5px] border border-slate-200">
+                        URL: <span class="text-indigo-600 underline">https://exfat-dev3.github.io/maroidOS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specs Tab (TAB-A04-BR3) -->
+        <section id="tab-specs" class="tab-content hidden space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900">端末情報一覧</h2>
+                <p class="text-sm text-slate-600">チャレンジパッド各機種の詳細スペックです。</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- TAB-A04-BR3 -->
+                <div class="bg-white border border-slate-200 rounded-[5px] p-6 shadow-sm space-y-4">
+                    <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">チャレンジパッド3 (TAB-A04-BR3)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-[5px] border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-1">基本ハードウェア</h4>
+                            <p><strong class="text-slate-700">OS:</strong> Android 7.0</p>
+                            <p><strong class="text-slate-700">CPU:</strong> A-35 4コア 0.6-1.3GHz</p>
+                            <p><strong class="text-slate-700">GPU:</strong> PowerVR GE8300 (1コア)</p>
+                            <p><strong class="text-slate-700">メモリ (RAM):</strong> SAMSUNG製 LPDDR3 2GB</p>
+                            <p><strong class="text-slate-700">ストレージ (ROM):</strong> SAMSUNG製 eMMC 5.1 16GB</p>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-[5px] border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-1">ディスプレイ・その他</h4>
+                            <p><strong class="text-slate-700">ディスプレイ:</strong> 10.1インチ (1280×800ドット)</p>
+                            <p><strong class="text-slate-700">タッチパネル:</strong> 抵抗膜方式</p>
+                            <p><strong class="text-slate-700">本体サイズ:</strong> 高さ約192mm × 幅約272mm × 厚さ約16mm</p>
+                            <p><strong class="text-slate-700">重量:</strong> 約640g</p>
+                            <p><strong class="text-slate-700">無線LAN:</strong> Wi-Fi (IEEE802.11 a/b/g/n/ac) 2.4GHz/5GHz</p>
+                            <p><strong class="text-slate-700">Bluetooth:</strong> 4.1</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB-A05-BD -->
+                <div class="bg-white border border-slate-200 rounded-[5px] p-6 shadow-sm space-y-4">
+                    <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">チャレンジパッドNeo (TAB-A05-BD)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-[5px] border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-1">基本ハードウェア</h4>
+                            <p><strong class="text-slate-700">OS:</strong> Android 9</p>
+                            <p><strong class="text-slate-700">製造元:</strong> 三洋テクノソリューションズ鳥取</p>
+                            <p><strong class="text-slate-700">SoC:</strong> MT8365V (表記上MT8168A)</p>
+                            <p><strong class="text-slate-700">GPU:</strong> ARM Mali G52 MC1</p>
+                            <p><strong class="text-slate-700">メモリ (RAM):</strong> 4GB</p>
+                            <p><strong class="text-slate-700">ストレージ (ROM):</strong> 16GB</p>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-[5px] border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-1">ディスプレイ・その他</h4>
+                            <p><strong class="text-slate-700">ディスプレイ:</strong> 1200x1920 タッチパネル(Wacom I2C)</p>
+                            <p><strong class="text-slate-700">無線LAN:</strong> CONSYS_MT8168</p>
+                            <p><strong class="text-slate-700">Bluetooth:</strong> あり</p>
+                            <p><strong class="text-slate-700">カメラ:</strong> 前面 4.9MP / 背面 4.9MP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB-A05-BA1 -->
+                <div class="bg-white border border-slate-200 rounded-[5px] p-6 shadow-sm space-y-4">
+                    <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">チャレンジパッドNext (TAB-A05-BA1)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-[5px] border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-1">基本ハードウェア</h4>
+                            <p><strong class="text-slate-700">OS:</strong> Android 9</p>
+                            <p><strong class="text-slate-700">製造元:</strong> パナソニックソリューションテクノロジー</p>
+                            <p><strong class="text-slate-700">SoC:</strong> MT8168A</p>
+                            <p><strong class="text-slate-700">GPU:</strong> ARM Mali G52 MC1</p>
+                            <p><strong class="text-slate-700">メモリ (RAM):</strong> 4GB</p>
+                            <p><strong class="text-slate-700">ストレージ (ROM):</strong> 16GB</p>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-[5px] border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-1">ディスプレイ・その他</h4>
+                            <p><strong class="text-slate-700">ディスプレイ:</strong> 1200x1920 マルチタッチ</p>
+                            <p><strong class="text-slate-700">無線LAN:</strong> CONSYS_MT8168</p>
+                            <p><strong class="text-slate-700">Bluetooth:</strong> あり</p>
+                            <p><strong class="text-slate-700">カメラ:</strong> 前面 4.9MP / 背面 4.9MP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Credits Tab -->
+        <section id="tab-credits" class="tab-content hidden space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900">サイトクレジット</h2>
+                <p class="text-sm text-slate-600">このサイトおよびプロジェクトの制作・運営メンバーをご紹介します。</p>
+            </div>
+
+            <div class="grid md:grid-cols-1 gap-6 max-w-xl">
+                <div class="bg-white border border-slate-200 rounded-[5px] p-6 shadow-sm flex items-center space-x-4">
+                    <img src="https://github.com/exfat-dev3/maroidOS/blob/main/icon_maron.png?raw=true" alt="maron" class="w-16 h-16 rounded-full object-cover border border-slate-200 shadow-sm" onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=maron'">
+                    <div>
+                        <span class="px-2.5 py-0.5 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full border border-indigo-100">サイト制作者 / 開発者</span>
+                        <h3 class="text-xl font-bold text-slate-900 mt-1">maron</h3>
+                        <p class="text-sm text-slate-600 mt-0.5">maroidOSの開発や各種ハッキング・研究を行っています。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PixelTouch Warning Modal -->
+    <div id="pixel-touch-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+            <div id="pixel-touch-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">⚠️</div>
+                    <h3 class="text-lg font-bold text-slate-900">お知らせ・警告</h3>
+                </div>
+                <div class="space-y-3 mb-6">
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        PixelTouchはサービス終了します。<br>
+                        今後からはbypass.binを利用してください。
+                    </p>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button onclick="delayedAction(() => closePixelTouchModal(), event)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-[5px] transition ripple">閉じる</button>
+                    <a id="pixel-touch-confirm-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="closePixelTouchModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition shadow ripple">外部サイトへ移動</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PixelTouch Details Modal -->
+    <div id="pixeltouch-details-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="pixeltouch-details-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">📱</div>
+                <h3 class="text-lg font-bold text-slate-900">PixelTouch 詳細</h3>
+            </div>
+            <div class="text-slate-600 text-sm leading-relaxed mb-6 space-y-3 bg-slate-50 p-4 rounded-[5px] border border-slate-200">
+                <p>PixelTouchはGoogle PlayストアやPixel機能をチャレンジタブレットで動作させるためのROMです。 GoogleアプリとPixelの便利な機能(ランチャー/壁紙/アイコン/フォント/ブートアニメーション)などが含まれています。</p>
+            </div>
+            <div class="flex justify-end">
+                <button onclick="delayedAction(() => closePixelTouchDetailsModal(), event)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition ripple">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PixelTouch Credits Modal -->
+    <div id="pixeltouch-credits-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="pixeltouch-credits-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">👥</div>
+                <h3 class="text-lg font-bold text-slate-900">PixelTouch クレジット</h3>
+            </div>
+            <div class="space-y-4 mb-6">
+                <div class="bg-slate-50 border border-slate-200 rounded-[5px] p-4 flex items-center space-x-4">
+                    <img src="https://avatars.githubusercontent.com/u/103878816?v=4" alt="kaepi2022" class="w-12 h-12 rounded-full object-cover border border-slate-200 shadow-sm" onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=User'">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">kaepi2022</h4>
+                        <p class="text-xs text-slate-500">PixelTouch Developer / Contributor</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-[5px] p-4 flex items-center space-x-4">
+                    <img src="https://avatars.githubusercontent.com/u/52069677?v=4" alt="s1204IT" class="w-12 h-12 rounded-full object-cover border border-slate-200 shadow-sm" onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=User'">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">s1204IT</h4>
+                        <p class="text-xs text-slate-500">PixelTouch Developer / Contributor</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <button onclick="delayedAction(() => closePixelTouchCreditsModal(), event)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition ripple">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cpad GMS System Credits Modal -->
+    <div id="gms-credits-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="gms-credits-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">👥</div>
+                <h3 class="text-lg font-bold text-slate-900">Cpad GMS System クレジット</h3>
+            </div>
+            <div class="space-y-4 mb-6">
+                <div class="bg-slate-50 border border-slate-200 rounded-[5px] p-4 flex items-center space-x-4">
+                    <img src="https://avatars.githubusercontent.com/u/52069677?v=4" alt="s1204IT" class="w-12 h-12 rounded-full object-cover border border-slate-200 shadow-sm" onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=User'">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">s1204IT</h4>
+                        <p class="text-xs text-slate-500">Cpad GMS System Developer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <button onclick="delayedAction(() => closeGmsCreditsModal(), event)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition ripple">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- maroidOS v1.0.0 Credits Modal -->
+    <div id="maroid-credits-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="maroid-credits-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">👥</div>
+                <h3 class="text-lg font-bold text-slate-900">maroidOS v1.0.0 クレジット</h3>
+            </div>
+            <div class="space-y-4 mb-6">
+                <div class="bg-slate-50 border border-slate-200 rounded-[5px] p-4 flex items-center space-x-4">
+                    <img src="https://github.com/exfat-dev3/maroidOS/blob/main/icon_maron.png?raw=true" alt="maron" class="w-12 h-12 rounded-full object-cover border border-slate-200 shadow-sm" onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=maron'">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">maron</h4>
+                        <p class="text-xs text-slate-500">maroidOS Developer</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-[5px] p-4 flex items-center space-x-4">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxCYgdjazoCOAWjIv4261201VXKqlERPMvsv8XiOtMew&s" alt="Lubuntu 24.04" class="w-12 h-12 rounded-full object-cover border border-slate-200 shadow-sm" onerror="this.src='https://placehold.co/100x100/e2e8f0/475569?text=Lubuntu'">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">Lubuntu 24.04</h4>
+                        <p class="text-xs text-slate-500">Build Environment / Contributor</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <button onclick="delayedAction(() => closeMaroidCreditsModal(), event)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition ripple">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cpad GMS System Details Modal -->
+    <div id="gms-details-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="gms-details-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">📱</div>
+                <h3 class="text-lg font-bold text-slate-900">Cpad GMS System</h3>
+            </div>
+            <div id="gms-markdown-content" class="text-slate-600 text-sm leading-relaxed mb-6 space-y-3">
+                <!-- Markdown rendered content will be injected here -->
+            </div>
+            <div class="flex justify-end">
+                <button onclick="delayedAction(() => closeGmsDetailsModal(), event)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition ripple">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- maroidOS v1.0.0 Details Modal -->
+    <div id="maroid-details-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="maroid-details-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">🤖</div>
+                <h3 class="text-lg font-bold text-slate-900">maroidOS v1.0.0</h3>
+            </div>
+            <div id="maroid-markdown-content" class="text-slate-600 text-sm leading-relaxed mb-6 space-y-3">
+                <!-- Markdown rendered content will be injected here -->
+            </div>
+            <div class="flex justify-end">
+                <button onclick="delayedAction(() => closeMaroidDetailsModal(), event)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition ripple">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generic Message Box Modal -->
+    <div id="generic-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="generic-modal-content" class="bg-white border border-slate-200 w-full max-w-md rounded-[5px] p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <h3 id="generic-modal-title" class="text-lg font-bold text-slate-900 mb-2">通知</h3>
+            <p id="generic-modal-text" class="text-slate-600 text-sm leading-relaxed mb-6"></p>
+            <div class="flex justify-end">
+                <button onclick="delayedAction(() => closeGenericModal(), event)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-[5px] transition ripple">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switcher with event persistence
+        function switchTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(el => el.classList.add('hidden'));
+
+            const target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.remove('hidden');
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-700', 'hover:bg-slate-200');
+            });
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.remove('bg-slate-100', 'text-slate-700', 'hover:bg-slate-200');
+                event.currentTarget.classList.add('bg-indigo-600', 'text-white');
+            }
+        }
+
+        // 0.1 second delayed action handler for all buttons
+        function delayedAction(callback, event) {
+            if (event) event.preventDefault();
+            setTimeout(() => {
+                callback();
+            }, 100);
+        }
+
+        // Web Audio API Warning Sound Generator
+        function playWarningSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                
+                // First Beep
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15);
+                
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+
+                // Second Beep
+                setTimeout(() => {
+                    try {
+                        const osc2 = ctx.createOscillator();
+                        const gain2 = ctx.createGain();
+                        osc2.type = 'sine';
+                        osc2.frequency.setValueAtTime(880, ctx.currentTime);
+                        osc2.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.15);
+                        
+                        gain2.gain.setValueAtTime(0.2, ctx.currentTime);
+                        gain2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                        
+                        osc2.connect(gain2);
+                        gain2.connect(ctx.destination);
+                        
+                        osc2.start();
+                        osc2.stop(ctx.currentTime + 0.3);
+                    } catch(e) {}
+                }, 150);
+            } catch (e) {
+                console.log('Audio playback error:', e);
+            }
+        }
+
+        // PixelTouch Modal Handlers with Fade & Warning Sound
+        function showPixelTouchModal(event) {
+            event.preventDefault();
+            const href = event.currentTarget.getAttribute('href');
+            const confirmBtn = document.getElementById('pixel-touch-confirm-btn');
+            if (confirmBtn) confirmBtn.setAttribute('href', href);
+
+            const modal = document.getElementById('pixel-touch-modal');
+            const modalContent = document.getElementById('pixel-touch-modal-content');
+            if (modal && modalContent) {
+                modal.classList.remove('hidden');
+                playWarningSound();
+                
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+
+        function closePixelTouchModal() {
+            const modal = document.getElementById('pixel-touch-modal');
+            const modalContent = document.getElementById('pixel-touch-modal-content');
+            if (modal && modalContent) {
+                modal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // PixelTouch Credits Modal Handlers
+        function showPixelTouchCreditsModal() {
+            const modal = document.getElementById('pixeltouch-credits-modal');
+            const modalContent = document.getElementById('pixeltouch-credits-modal-content');
+            if (modal && modalContent) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+
+        function closePixelTouchCreditsModal() {
+            const modal = document.getElementById('pixeltouch-credits-modal');
+            const modalContent = document.getElementById('pixeltouch-credits-modal-content');
+            if (modal && modalContent) {
+                modal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // PixelTouch Details Modal Handlers
+        function showPixelTouchDetailsModal() {
+            const modal = document.getElementById('pixeltouch-details-modal');
+            const modalContent = document.getElementById('pixeltouch-details-modal-content');
+            if (modal && modalContent) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+
+        function closePixelTouchDetailsModal() {
+            const modal = document.getElementById('pixeltouch-details-modal');
+            const modalContent = document.getElementById('pixeltouch-details-modal-content');
+            if (modal && modalContent) {
+                modal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Cpad GMS System Credits Modal Handlers
+        function showGmsCreditsModal() {
+            const modal = document.getElementById('gms-credits-modal');
+            const modalContent = document.getElementById('gms-credits-modal-content');
+            if (modal && modalContent) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+
+        function closeGmsCreditsModal() {
+            const modal = document.getElementById('gms-credits-modal');
+            const modalContent = document.getElementById('gms-credits-modal-content');
+            if (modal && modalContent) {
+                modal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // maroidOS v1.0.0 Credits Modal Handlers
+        function showMaroidCreditsModal() {
+            const modal = document.getElementById('maroid-credits-modal');
+            const modalContent = document.getElementById('maroid-credits-modal-content');
+            if (modal && modalContent) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+
+        function closeMaroidCreditsModal() {
+            const modal = document.getElementById('maroid-credits-modal');
+            const modalContent = document.getElementById('maroid-credits-modal-content');
+            if (modal && modalContent) {
+                modal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Cpad GMS System Details Modal Handlers
+        function showGmsDetailsModal() {
+            const modal = document.getElementById('gms-details-modal');
+            const modalContent = document.getElementById('gms-details-modal-content');
+            const mdContainer = document.getElementById('gms-markdown-content');
+            
+            const markdownText = `# 対応端末
+
+- **TAB-A03-BS**
+- **TAB-A03-BR/BR2/BR2B**
+- **TAB-A04-BR3**
+- **TAB-A05-BD**
+- **TAB-A05-BA1**`;
+
+            if (mdContainer) {
+                let html = markdownText
+                    .replace(/^# (.*$)/gm, '<h4 class="font-bold text-slate-900">$1</h4>')
+                    .replace(/^- (.*$)/gm, '<li class="font-mono text-xs text-slate-700">$1</li>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                
+                html = html.replace(/(<li.*<\/li>\n?)+/g, '<ul class="list-disc pl-5 space-y-1 bg-slate-50 p-3 rounded-[5px] border border-slate-200">$&</ul>');
+                
+                mdContainer.innerHTML = html;
+            }
+
+            if (modal && modalContent) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+
+        function closeGmsDetailsModal() {
+            const modal = document.getElementById('gms-details-modal');
+            const modalContent = document.getElementById('gms-details-modal-content');
+            if (modal && modalContent) {
+                modal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // maroidOS v1.0.0 Details Modal Handlers
+        function showMaroidDetailsModal() {
+            const modal = document.getElementById('maroid-details-modal');
+            const modalContent = document.getElementById('maroid-details-modal-content');
+            const mdContainer = document.getElementById('maroid-markdown-content');
+            
+            const markdownText = `# maroidOS v1.0.0 特徴
+
+- AOSPベースの初期安定版ビルドを公開
+- Dcha機能を完全に削除し、軽量化を達成
+- チャレンジパッドNeoに対応
+- AuroraStore、Amazeなどのプリインアプリ。`;
+
+            if (mdContainer) {
+                let html = markdownText
+                    .replace(/^# (.*$)/gm, '<h4 class="font-bold text-slate-900">$1</h4>')
+                    .replace(/^- (.*$)/gm, '<li class="text-xs text-slate-700">$1</li>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                
+                html = html.replace(/(<li.*<\/li>\n?)+/g, '<ul class="list-disc pl-5 space-y-1 bg-slate-50 p-3 rounded-[5px] border border-slate-200">$&</ul>');
+                
+                mdContainer.innerHTML = html;
+            }
+
+            if (modal && modalContent) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+
+        function closeMaroidDetailsModal() {
+            const modal = document.getElementById('maroid-details-modal');
+            const modalContent = document.getElementById('maroid-details-modal-content');
+            if (modal && modalContent) {
+                modal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Generic Alert Modal Handlers
+        function alertBox(text) {
+            const modal = document.getElementById('generic-modal');
+            const modalContent = document.getElementById('generic-modal-content');
+            const textEl = document.getElementById('generic-modal-text');
+            if (textEl) textEl.innerText = text;
+
+            if (modal && modalContent) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+
+        function closeGenericModal() {
+            const modal = document.getElementById('generic-modal');
+            const modalContent = document.getElementById('generic-modal-content');
+            if (modal && modalContent) {
+                modal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+    </script>
+</body>
+</html>
